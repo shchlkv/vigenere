@@ -20,8 +20,8 @@ import math
 import sys
 alphabet=list('абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
 #keyword=list('бетономешалкавйъчыгыхеаюукй')               #password or keyword
-#word=list('безинформатикинетникчемноесуществованиеэтогомирабудущегоиникодганебудетмирбслужилямщикоомА')
-word=[]
+#word=list('безинформатикинетникчемноесуществованиеэтогомирабудущегоиникодганебудетмирбслужилямщикоом')
+#word=[]
 indexes_of_keyword=[]           # list, which will to contain indices of keyword
 indexes_of_word=[]              # list, which will to contain indices of word
 crypt_word=[]
@@ -43,42 +43,34 @@ for i in range(len(keyword)):
                 #print(index_of_letter_from_list_alphabet)
                 indexes_of_keyword.append(index_of_letter_from_list_alphabet)  # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
              
-#тут где-то ошибка в строке 52
 #надо сделать так: читать строки из файла в список, а дальше работать со списком, как это уже было.
+
 vigenere_file_text=open('/home/ark/vigenere_file_text.txt', 'r')
-#print(vigenere_file_text.read(1))
-#print(letter)
-#for letter in vigenere_file_text:
-counter_of_letters_in_text_file=len(letter)
-print(len(letter))
-        
+for line in vigenere_file_text:
+#        counter_of_letters_in_text_file=len(letter)
+#        print(len(letter))
+#        print(line)
+        word=line #читаем стороку из файла и присваиваем ее списку word
+#print(word)
+#print(len(word))
+
 for i in range(len(word)):
         if word[i] in alphabet:         #cheking of letters from list 'word' with index 'i' in list 'alphabet'
                 letter=word[i]          #this variable 'letter' contains letter from list 'word' with index 'i'.
                 index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
                 indexes_of_word.append(index_of_letter_from_list_alphabet)        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
+               # print(index_of_letter_from_list_alphabet)
 
-'''
-for letter in vigenere_file_text:
-        print(letter) #вывод содержимого файла для контроля. выводится построчно
-        #print(len(letter)) #кол-во букв в файле
-        counter_of_letters_in_text_file=len(letter)
-        word=letter
-        if letter in alphabet:         #cheking of letters from list 'word' with index 'i' in list 'alphabet'
-                #letter=i          #this variable 'letter' contains letter from list 'word' with index 'i'.
-                index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
-                print(index_of_letter_from_list_alphabet)
-                indexes_of_word.append(index_of_letter_from_list_alphabet)        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
-                print(index_of_letter_from_list_alphabet)
-'''
 # calculation of cryptword
-n=counter_of_letters_in_text_file 
-#print(n)
+n=len(word) 
+print(n)
 i=0
 j=0
 while n > 0:
         new_index_letter=(indexes_of_keyword[i]+indexes_of_word[j])%33
+       # print(new_index_letter)
         new_cript_letter=alphabet[new_index_letter]
+      #  print(new_cript_letter)
         crypt_word.append(new_cript_letter)
         n-=1
         i+=1
@@ -97,7 +89,7 @@ for i in range(len(word)):
                 index_of_letter_from_list_alphabet=alphabet.index(letter) 
                 indexes_of_cript_word.append(index_of_letter_from_list_alphabet)  
 
-n=counter_of_letters_in_text_file
+n=len(word)
 i=0
 j=0
 while n > 0:
