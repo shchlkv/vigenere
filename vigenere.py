@@ -21,6 +21,9 @@ import sys
 
 alphabet=list('абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
 
+#продумать, как заглавные буквы менять на строчные
+#ввести проверку на ввод некорректных символов или латиницы
+
 #keyword=list('бетономешалкавйъчыгыхеаюукй')               #password or keyword
 #word=list('безинформатикинетникчемноесуществованиеэтогомирабудущегоиникодганебудетмирбслужилямщикоом')
 #word=[]
@@ -30,25 +33,44 @@ crypt_word=[]
 indexes_of_cript_word=[]
 decrypt_word=[]
 
+
+
 print('your file must to contain text or phrase or word wich you want to encrypt. This file call "vigenere_file_text.txt"')
 #word=input('Enter any word or phrase wich need to encrypt. The phrase should be without spaces and with only cyrillic letters: ')
 keyword=input('Enter keyword to encrypt the phrase: ')
 
+'''проверка на корректность ввода ключевого слова/фразы
+
+for i in range(len(keyword)):
+        if keyword[i] in alphabet:          #cheking of letters from list 'keyword' with index 'i' in list 'alphabet'
+                break
+        else:
+                print('Введены некорректные символы, повторите ввод')
+                keyword=input('Enter keyword to encrypt the text/ введите ключевое слово, чтобы зашифровать текст: ')
+'''
+
+'''
+        1. Проверка наличия введенных символов ключевого слова в списке alphabet
+        2. вычисление индексов ключевого слова
+        3. индексы букв помещаются в список indexes_of_keyword
+        4. проверка на корректность ввода ключевого слова/фразы
+'''
 
 vigenere_file_encrypt=open('/home/ark/vigenere_file_encrypt.txt', 'w')
-
 
 for i in range(len(keyword)):
         if keyword[i] in alphabet:          #cheking of letters from list 'keyword' with index 'i' in list 'alphabet'
                 letter=keyword[i]           #this variable 'letter' contains letter from list 'keyword' with index 'i'. 
                 index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
                 indexes_of_keyword.append(index_of_letter_from_list_alphabet)  # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
+        else:
+                print('Введены некорректные символы, повторите ввод')
+                keyword=input('Enter keyword to encrypt the text/ введите ключевое слово, чтобы зашифровать текст: ')
+             
              
 #надо сделать так: читать строки из файла в список, а дальше работать со списком, как это уже было.
 
-'''
-этот блок открывает файл vigenere_file_text.txt, читает из него и присваивает переменной word считанный текст
-'''
+''' этот блок открывает файл vigenere_file_text.txt, читает из него и присваивает переменной word считанный текст '''
 
 vigenere_file_text=open('/home/ark/vigenere_file_text.txt', 'r')
 for line in vigenere_file_text:
