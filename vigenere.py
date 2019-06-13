@@ -37,22 +37,11 @@ print('your file must to contain text or phrase or word wich you want to encrypt
 #word=input('Enter any word or phrase wich need to encrypt. The phrase should be without spaces and with only cyrillic letters: ')
 keyword=input('Enter keyword to encrypt the phrase: ')
 
-'''проверка на корректность ввода ключевого слова/фразы
-
-for i in range(len(keyword)):
-        if keyword[i] in alphabet:          #cheking of letters from list 'keyword' with index 'i' in list 'alphabet'
-                break
-        else:
-                print('Введены некорректные символы, повторите ввод')
-                keyword=input('Enter keyword to encrypt the text/ введите ключевое слово, чтобы зашифровать текст: ')
-'''
-
 '''
         1. Проверка наличия введенных символов ключевого слова в списке alphabet
         2. вычисление индексов ключевого слова
         3. индексы букв помещаются в список indexes_of_keyword
         4. проверка на корректность ввода ключевого слова/фразы
-        
 '''
 
 for i in range(len(keyword)):
@@ -67,20 +56,24 @@ for i in range(len(keyword)):
                 
 ''' блок открывает файл vigenere_file_text.txt, читает из него и присваивает переменной word считанный текст '''
 
-vigenere_file_text=open('/home/ark/vigenere_file_text.txt', 'r')
+#vigenere_file_text = open('/home/ark/vigenere_file_text.txt', 'r').readlines()
+ 
+'''
 for word in vigenere_file_text:
-        word #читаем стороку из файла и присваиваем ее переменной word.
-        #Если нет лишних символов, но фраза разбита на строки, то будет зашифрована последняя фраза
-        #нужно склеить фразу
-
-'''блок обработки фразы, которую мы будем шифровать'''
-
-word=word.lower() # если в тексте есть заглавные буквы - преобразуем в строчные
-word=word.replace(" ", "") #пробелы исключаются
-# если нет символа в списке alphabet, то он удаляется.
-for letter in word:
+    if not word.isspace():
+        word=word.replace('\n', ''))
         if letter not in alphabet:
                 word=word.replace(letter, "")
+   '''     
+
+with open('/home/ark/vigenere_file_text.txt', 'r') as vigenere_file_text:
+        word=vigenere_file_text.read()
+        word=word.lower()
+        for letter in word:
+                if letter not in alphabet:
+                        word=word.replace(letter, "")
+
+print(word, "END")
 
 
 '''
@@ -96,12 +89,12 @@ for i in range(len(word)):
                 indexes_of_word.append(index_of_letter_from_list_alphabet)        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
 
 
-# этот блок шифрует фразу из файла vigenere_file_text.txt 
+''' БЛОК ШИФРАЦИИ (фраза из файла vigenere_file_text.txt) '''
 
 n=len(word) # количество букв в файле vigenere_file_text.txt
 i=0
 j=0
-while n > 1:
+while n > 0:
         new_index_letter=(indexes_of_keyword[i]+indexes_of_word[j])%33 # вычисляем индекс зашифрованной буквы
         new_cript_letter=alphabet[new_index_letter] # находим по индексу букву в списке алфавит
         crypt_word.append(new_cript_letter) # добавляем уже зашифрованную букву в конец слова
@@ -126,7 +119,7 @@ print(''.join(keyword))
 print(''.join(crypt_word))
 '''
 
-''' БЛОК - РАСШИФРОВКА КАК СЛОВА ИЗ СПИСКА crypt_word, ТАК И ИЗ ФАЙЛА vigenere_file_decrypt.txt '''
+''' БЛОК РАСШИФРОВКИ КАК СЛОВА ИЗ СПИСКА crypt_word, ТАК И ИЗ ФАЙЛА vigenere_file_decrypt.txt '''
 
 #откроем файл на чтение
 vigenere_file_encrypt=open('/home/ark/vigenere_file_encrypt.txt', 'r')
