@@ -14,13 +14,9 @@ import math
 import sys
 
 alphabet=list('абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
-
-#ввести проверку на ввод символов или латиницы
-
-
 word=[]
-indexes_of_keyword=[]           # list, which will to contain indices of keyword
-indexes_of_word=[]              # list, which will to contain indices of word
+indexes_of_keyword=[]         
+indexes_of_word=[]            
 crypt_word=[]
 indexes_of_cript_word=[]
 decrypt_word=[]
@@ -41,7 +37,6 @@ print("Программа предназначена для шифрования
 
 # первая попавшаяся в keyword буква, которая не соответствует списку alphabet
 # нужно сделать так: ЛЮБАЯ попавшаяся в keyword буква, которая не соответствует списку alphabet, вызывает функцию/блок обработки ошибки
-
 
 
 def keyword_enter():
@@ -69,15 +64,6 @@ for i in range(len(keyword)):
         index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
         indexes_of_keyword.append(index_of_letter_from_list_alphabet)  # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
 
-
-        #keyword=input('Повторите ввод. Enter keyword to encrypt the text/ введите ключевое слово, чтобы зашифровать текст: ')
-
-
-#keyword *= 0
-
- 
-
-#print(len(keyword))
 print('----------------------')
                
 '''
@@ -96,15 +82,13 @@ with open('/home/ark/vigenere_file_text.txt', 'r') as vigenere_file_text:
 
 '''
 1. Читаем каждую букву word (то, что считано из файла vigenere_file_text.txt),
-2. вычисляем  индекс каждой буквы в списке alhabet,
-3. добавляем каждый вычесленный индекс в список indexes_of_word
+2. добавляем каждый вычесленный индекс в список indexes_of_word
 '''
 
-for i in range(len(word)):
-        if word[i] in alphabet:         #it is cheking of letters from list 'word' with index 'i' in list 'alphabet'
-                letter=word[i]          #this variable 'letter' is contains letter from list 'word' with index 'i'.
-                index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
-                indexes_of_word.append(index_of_letter_from_list_alphabet)        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
+for letter in word:
+        #if letter in alphabet:         #it is cheking of letters from list 'word' with index 'i' in list 'alphabet'
+        index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
+        indexes_of_word.append(index_of_letter_from_list_alphabet)        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
 
 
 ''' БЛОК ШИФРАЦИИ (фраза из файла vigenere_file_text.txt) '''
@@ -151,11 +135,9 @@ for word in vigenere_file_encrypt:
 
 print(word)
 
-for i in range(len(word)):
-        if crypt_word[i] in alphabet:   
-                letter=crypt_word[i]          
-                index_of_letter_from_list_alphabet=alphabet.index(letter) 
-                indexes_of_cript_word.append(index_of_letter_from_list_alphabet)  # добавляем индекс буквы из списка алфавит в список  indexes_of_cript_word
+for letter in word:
+        index_of_letter_from_list_alphabet=alphabet.index(letter) 
+        indexes_of_cript_word.append(index_of_letter_from_list_alphabet)  
 
 
 n=len(word) # количество букв в файле vigenere_file_encrypt.txt
