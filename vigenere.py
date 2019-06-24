@@ -13,7 +13,8 @@ vigenere_file_decrypt.txt - расшифрованный текст
 import math
 import sys
 
-alphabet=list('абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
+#alphabet=list('абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
+alphabet=list('АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ')
 word=[]
 indexes_of_keyword=[]         
 indexes_of_word=[]            
@@ -35,13 +36,10 @@ print("Программа предназначена для шифрования
 
 '''
 
-# первая попавшаяся в keyword буква, которая не соответствует списку alphabet
-# нужно сделать так: ЛЮБАЯ попавшаяся в keyword буква, которая не соответствует списку alphabet, вызывает функцию/блок обработки ошибки
-
 
 def keyword_enter():
         keyword=input('Чтобы зашифровать текст введите ключевое слово, которое должно содержать только буквы кириллического алфавита:  ')
-        return keyword.lower()
+        return keyword.upper()
 
 
 def keyword_check():
@@ -59,10 +57,9 @@ def keyword_check():
 keyword = keyword_check()
 
 
-for i in range(len(keyword)): 
-        letter=keyword[i]           #this variable 'letter' contains letter from list 'keyword' with index 'i'. 
-        index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
-        indexes_of_keyword.append(index_of_letter_from_list_alphabet)  # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
+for letter in keyword: 
+        indexes_of_keyword.append(alphabet.index(letter))  # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
+
 
 print('----------------------')
                
@@ -74,7 +71,7 @@ print('----------------------')
 
 with open('/home/ark/vigenere_file_text.txt', 'r') as vigenere_file_text:
         word=vigenere_file_text.read()
-        word=word.lower()
+        word=word.upper()
         for letter in word:
                 if letter not in alphabet:
                         word=word.replace(letter, "")
@@ -86,9 +83,7 @@ with open('/home/ark/vigenere_file_text.txt', 'r') as vigenere_file_text:
 '''
 
 for letter in word:
-        #if letter in alphabet:         #it is cheking of letters from list 'word' with index 'i' in list 'alphabet'
-        index_of_letter_from_list_alphabet=alphabet.index(letter) #this variable contains index of letter from 'alphabet' list
-        indexes_of_word.append(index_of_letter_from_list_alphabet)        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
+        indexes_of_word.append(alphabet.index(letter))        # insert 'index_of_letter_from_list_alphabet' in  list 'indexes_of_keyword' 
 
 
 ''' БЛОК ШИФРАЦИИ (фраза из файла vigenere_file_text.txt) '''
@@ -135,9 +130,9 @@ for word in vigenere_file_encrypt:
 
 print(word)
 
+#получение индексов букв зашифрованного текста
 for letter in word:
-        index_of_letter_from_list_alphabet=alphabet.index(letter) 
-        indexes_of_cript_word.append(index_of_letter_from_list_alphabet)  
+        indexes_of_cript_word.append(alphabet.index(letter))  
 
 
 n=len(word) # количество букв в файле vigenere_file_encrypt.txt
